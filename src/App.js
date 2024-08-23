@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import Cart from './component/Cart';
 import ProductList from './component/ProductList';
+import Title from './component/Title';
 
 class App extends Component {
   render() {
     return (
       <>
   <div className="container">
-    {/* TITLE : START */}
-    <div className="page-header">
-      <h1>
-        Project 02 - Shopping Cart <small>ReactJS</small>
-      </h1>
-    </div>
-    {/* TITLE : END */}
+    <Title></Title>
     <div className="row">
       <ProductList></ProductList>
       <Cart></Cart>

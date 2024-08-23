@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import CartItem from './CartItem';
+import CartInfo from './CartInfo';
+import Notify from './Notify';
 
 class Cart extends Component {
     render() {
@@ -22,60 +25,13 @@ class Cart extends Component {
                   <th width="25%">Action</th>
                 </tr>
               </thead>
-              <tbody id="my-cart-body">
-                {/* CART BODY */}
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Lorem ipsum.</td>
-                  <td>12 USD</td>
-                  <td>
-                    <input
-                      name="cart-item-quantity-1"
-                      type="number"
-                      defaultValue={1}
-                      min={1}
-                    />
-                  </td>
-                  <td>
-                    <strong>12 USD</strong>
-                  </td>
-                  <td>
-                    <a
-                      className="label label-info update-cart-item"
-                      href="#"
-                      data-product=""
-                    >
-                      Update
-                    </a>
-                    <a
-                      className="label label-danger delete-cart-item"
-                      href="#"
-                      data-product=""
-                    >
-                      Delete
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot id="my-cart-footer">
-                {/* CART FOOTER */}
-                <tr>
-                  <th colSpan={6}>Empty product in your cart</th>
-                </tr>
-                <tr>
-                  <td colSpan={4}>
-                    There are <b>5</b> items in your shopping cart.
-                  </td>
-                  <td colSpan={2} className="total-price text-left">
-                    12 USD
-                  </td>
-                </tr>
-              </tfoot>
+              <CartItem></CartItem>
+              <CartInfo></CartInfo>
             </table>
           </div>
         </div>
         <div className="alert alert-success" role="alert" id="mnotification">
-          Updated <b>ivysaur</b>
+          <Notify></Notify>
         </div>
       </div>
       {/* CART : END */}
