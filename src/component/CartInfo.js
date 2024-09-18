@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 
 class CartInfo extends Component {
-    render() {
-        return (
-            <>
-            <tfoot id="my-cart-footer">
-                {/* CART FOOTER */}
-                <tr>
+
+      render() {
+        let {renderCount, renderTotal } = this.props;
+        let elementInfo = (
+          <tr>
                   <th colSpan={6}>Empty product in your cart</th>
                 </tr>
-                <tr>
-                  <td colSpan={4}>
-                    There are <b>5</b> items in your shopping cart.
-                  </td>
-                  <td colSpan={2} className="total-price text-left">
-                    12 USD
-                  </td>
-                </tr> 
-                </tfoot>
+        )
+        if(renderCount > 0){
+          elementInfo = (
+            <tfoot id="my-cart-footer">
+            {/* CART FOOTER */}
+            <tr>
+              <td colSpan={4}>
+                There are <b>{renderCount}</b> items in your shopping cart.
+              </td>
+              <td colSpan={2} className="total-price text-left">
+                {renderTotal} USD
+              </td>
+            </tr> 
+            </tfoot>
+        )}
+        return (
+            <>
+            {elementInfo}
             </>
         );
     }

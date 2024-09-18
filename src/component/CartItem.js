@@ -1,25 +1,42 @@
 import React, { Component } from 'react';
-
 class CartItem extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      quantity:0
+    }
+  }
+  componentWillUnmount = () => {
+    this.setState({
+      quantity: this.props.renderCart.quantity,
+    })
+  }
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      quantity: nextProps.renderCart.quantity,
+    })
+  }
     render() {
+      let {renderCart, stt} = this.props;
         return (
             <>
              <tbody id="my-cart-body">
                 {/* CART BODY */}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Lorem ipsum.</td>
-                  <td>12 USD</td>
+                  <th scope="row">{stt}</th>
+                  <td>{renderCart.product.productName}.</td>
+                  <td>{renderCart.product.price} USD</td>
                   <td>
                     <input
-                      name="cart-item-quantity-1"
+                      name="quantity"
                       type="number"
-                      defaultValue={1}
+                      value={this.state.quantity}
                       min={1}
+                      onChange={(event)=>{this.setState({quantity:event.target.value})}}
                     />
                   </td>
                   <td>
-                    <strong>12 USD</strong>
+                    <strong>{renderCart.product.price * renderCart.quantity} USD</strong>
                   </td>
                   <td>
                     <a

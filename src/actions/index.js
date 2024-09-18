@@ -1,5 +1,4 @@
-import { type } from '@testing-library/user-event/dist/type'
-import * as types from './actionTypes'
+import * as types from "../constants/actionTypes"
 
 export const act_list_product = ()=>{
     return{

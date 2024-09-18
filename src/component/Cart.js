@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import CartItem from './CartItem';
 import CartInfo from './CartInfo';
 import Notify from './Notify';
+import { connect } from 'react-redux';
 
 class Cart extends Component {
     render() {
+      let {carts} = this.props;
+      let elementCartItem = carts.map((item,index) => {
+        return <CartItem key={index} renderCart = {item} stt = {index+1}></CartItem>
+      })
+      let p_count = carts.length;
+      let tongTien = 0;
+      for(let i = 0; i < carts.length; i++){
+        tongTien += carts[i].product.price * carts[i].quantity;
+      }
         return (
             <>
                 {/* CART : START */}
@@ -25,8 +35,8 @@ class Cart extends Component {
                   <th width="25%">Action</th>
                 </tr>
               </thead>
-              <CartItem></CartItem>
-              <CartInfo></CartInfo>
+              {elementCartItem}
+              <CartInfo renderCount = {p_count} renderTotal = {tongTien}></CartInfo>
             </table>
           </div>
         </div>
@@ -39,5 +49,10 @@ class Cart extends Component {
         );
     }
 }
-
-export default Cart;
+//kết nối dữ liệu state của cart từ store(reducer) tới component 
+const mapStateToProps = (state) =>{
+  return{
+    carts: state.cart
+}
+}
+export default connect(mapStateToProps,null)(Cart);

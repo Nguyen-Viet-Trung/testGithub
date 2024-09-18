@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { act_buy_item } from '../actions';
+import { connect } from 'react-redux';
 class Product extends Component {
   constructor(props){
     super(props);
@@ -7,9 +8,33 @@ class Product extends Component {
       quantity: 1
     }
   }
+  handleBy = (product) =>{
+    //Mua hàng ->Phát sinh sự kiện ->Chuyển tới reducer để cập nhật state
+    this.props.buyItem(product, this.state.quantity);
+
+  }
     render() {
       let {renderProduct} = this.props
-        return (
+      let elementBy =<span className='price'>{renderProduct.price} USD</span>
+      if(renderProduct.quantity>0){
+        elementBy = (<>
+         <input
+                  name="quantity"
+                  type="number"
+                  value={this.state.quantity}
+                  min={1}
+                  onChange={(event)=>{this.setState({quantity:event.target.value})}}
+                />
+                <button data-product={1} className="btn btn-success" onClick={()=>this.handleBy(renderProduct)}>
+                  Mua hàng
+                </button>
+                <a data-product={1} href="#" className="price" onClick={()=>this.handleBy(renderProduct)}>
+                  {renderProduct.price} USD
+                </a>
+        
+         </>)
+      }
+      return (
             <>
              {/* PRODUCT : START */}
             <div className="media product">
@@ -27,20 +52,7 @@ class Product extends Component {
                 <p>
                   {renderProduct.descriptions}
                 </p>
-                <input
-                  name="quantity"
-                  type="number"
-                  value={this.state.quantity}
-                  min={1}
-                  onChange={(event)=>{this.setState({quantity:event.target.value})}}
-                />
-                <button data-product={1} className="btn btn-success">
-                  Mua hàng
-                </button>
-                <a data-product={1} href="#" className="price">
-                  {" "}
-                  {renderProduct.price} USD{" "}
-                </a>
+               {elementBy}
               </div>
             </div>
             {/* PRODUCT : END */}   
@@ -48,5 +60,13 @@ class Product extends Component {
         );
     }
 }
+// thực hiện phát sinh sự kiện đến store
+const mapDispatchToProps = (dispatch) => {
+  return {
+    buyItem: (product, quantity) => {
+      dispatch(act_buy_item(product, quantity));
+    }
+  }
+}
 
-export default Product;
+export default connect(null, mapDispatchToProps)(Product);

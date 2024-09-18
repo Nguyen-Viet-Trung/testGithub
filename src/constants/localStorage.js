@@ -1,3 +1,1 @@
-const LOCAL_STORAGE_NAME =  "shoppingCart";
-
-export default LOCAL_STORAGE_NAME;
+export const LOCAL_STORAGE_NAME =  "shoppingCart";

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Cart from './component/Cart';
 import ProductList from './component/ProductList';
 import Title from './component/Title';
-
+import cart from './reducer/cart';
 class App extends Component {
   render() {
+    console.log("Store: ", cart);
     return (
       <>
   <div className="container">

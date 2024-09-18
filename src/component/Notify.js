@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Notify extends Component {
     render() {
+        let {notify} = this.props;
         return (
             <>
-             Updated <b>ivysaur</b>   
+              <b>{notify}</b>   
             </>
         );
     }
 }
-
-export default Notify;
+const mapStateToProps = (state) => {
+    return {
+        notify: state.notify
+    }
+}
+export default connect(mapStateToProps,null)(Notify);
